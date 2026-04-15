@@ -1,0 +1,127 @@
+/* Base Container */
+.settings-form {
+  background: #1a1d21; /* Dark background */
+  color: #e2e8f0;
+  padding: 40px;
+}
+
+.main-title {
+  text-align: center;
+  color: #00a3ff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+}
+
+.section-header {
+  color: #00a3ff;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+/* Inputs & Selects */
+.dark-select {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #444;
+  color: #fff;
+  width: 100%;
+  padding: 8px 0;
+  outline: none;
+}
+
+.dark-underline-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #444;
+  color: #fff;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 0;
+  outline: none;
+}
+
+/* Checkbox & Radio Customization */
+.check-item, .radio-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 25px;
+  color: #999;
+  cursor: pointer;
+}
+
+.check-item input[type="checkbox"], 
+.radio-item input[type="radio"] {
+  accent-color: #00a3ff;
+  width: 16px;
+  height: 16px;
+}
+
+/* Tags (Blue Pills) */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag.blue-tag {
+  background: #0095ff;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.close-x {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Info Box with left border */
+.blue-info-border {
+  border-left: 3px solid #00a3ff;
+  padding-left: 15px;
+  color: #888;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Button */
+.center-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.purple-pill-btn {
+  background: #a333c8;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.purple-pill-btn:hover {
+  background: #8a2be2;
+  transform: scale(1.05);
+}
+
+.hint-txt {
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
+}
+
+.red-txt {
+  color: #ff4d4d;
+}

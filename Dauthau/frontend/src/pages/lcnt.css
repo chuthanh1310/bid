@@ -1,0 +1,26 @@
+.search-container {
+  display: flex;
+  flex-direction: column;
+}
+.filter-box {
+  width: 800px;
+  background: #0f172a; 
+  padding: 20px;
+  border-radius: 8px;
+  color: #cbd5e1;
+  text-align: left ;
+}
+
+.custom-table td a.text-cyan, 
+.custom-table td a.text-cyan:visited,
+.custom-table td a.text-cyan:active {
+  color: #38bdf8 !important;   
+  text-decoration: none !important; 
+  outline: none;
+  transition: color 0.2s ease;
+}
+
+.custom-table td a.text-cyan:hover {
+  color: #7dd3fc !important;   
+  text-decoration: none !important; 
+}

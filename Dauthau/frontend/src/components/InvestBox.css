@@ -1,0 +1,18 @@
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.radio-item input {
+  accent-color: #38bdf8;
+  cursor: pointer;
+}

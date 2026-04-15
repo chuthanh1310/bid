@@ -1,0 +1,132 @@
+.timeline {
+  padding: 20px;
+  text-align: left;
+}
+
+.timeline-header {
+  margin-bottom: 20px;
+}
+
+.tab {
+  background: #111827;
+  color: #22c55e;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.timeline-list {
+  position: relative;
+  margin-left: 30px;
+}
+
+.timeline-list::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #22c55e;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 2px;
+  top: 20px;
+  width: 16px;
+  height: 16px;
+  background: #22c55e;
+  border-radius: 50%;
+  border: 3px solid #0f172a;
+  z-index: 2;
+}
+
+.timeline-card {
+  margin-left: 30px;
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.badge {
+  background: #06b6d4;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.title {
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.status {
+  background: #22c55e;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.info-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 8px 0;
+  text-align: left ;
+}
+.clickable {
+  cursor: pointer;
+}
+.icons {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icons svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.info-line div:last-child {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.price {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+.detail {
+  display: inline-block;
+  margin-top: 10px;
+  color: #22c55e;
+  cursor: pointer;
+}
+
+.empty {
+  color: #9ca3af;
+}

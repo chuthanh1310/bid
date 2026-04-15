@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  cassandra:
+    image: cassandra:4.1
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    volumes:
+      # Ánh xạ thư mục dữ liệu Cassandra sang ổ D
+      - D:/DockerData/cassandra:/var/lib/cassandra
+    environment:
+      - MAX_HEAP_SIZE=512M
+      - HEAP_NEWSIZE=100M
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      # Giới hạn RAM để máy chạy mượt hơn (tùy chọn)
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      # Ánh xạ thư mục dữ liệu Elasticsearch sang ổ D
+      - D:/DockerData/elasticsearch:/usr/share/elasticsearch/data

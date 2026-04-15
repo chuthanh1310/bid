@@ -1,0 +1,236 @@
+.settings-container {
+  background-color: #121212;
+  color: #b0b0b0;
+  min-height: 100vh;
+  padding: 40px;
+  font-family: 'Inter', sans-serif;
+}
+.form-section{
+    text-align: left;
+}
+.cards-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  width: 320px;
+  border: 1px solid #2a2a2a;
+  transition: all 0.3s ease;
+}
+
+.card-active {
+  border-color: #7c3aed;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.15);
+}
+
+.card-header {
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px 12px 0 0;
+}
+
+.bg-purple { background: linear-gradient(90deg, #7c3aed, #6366f1); }
+.bg-cyan { background-color: #06b6d4; }
+.bg-blue { background-color: #3b82f6; }
+
+.card-body {
+  padding: 24px 20px;
+}
+
+.card-title {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.card-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #94a3b8;
+  height: 65px;
+}
+
+.card-footer {
+  padding: 0 20px 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-link {
+  color: #a78bfa;
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-link:hover { color: #c4b5fd; }
+
+/* Form Section */
+.settings-form {
+  max-width: 1000px;
+  margin: 0 auto;
+  border-top: 1px solid #2a2a2a;
+  padding-top: 40px;
+}
+.keyword-tag {
+  background: #3b82f6; 
+  color: white;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+.selected-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.remove-btn {
+  margin-right: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.section-title-main {
+  text-align: center;
+  color: #0ea5e9;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+  font-size: 20px;
+}
+
+.section-label {
+  color: #0ea5e9;
+  margin-bottom: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+}
+.custom-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.checkbox-group {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.custom-select, .custom-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #334155;
+  color: #f8fafc;
+  padding: 10px 0;
+  outline: none;
+  font-size: 14px;
+}
+
+.placeholder-select { color: #64748b; }
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.info-box {
+  border-left: 2px solid #3b82f6;
+  padding-left: 16px;
+  margin-bottom: 12px;
+}
+
+.info-box p {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 4px 0;
+  line-height: 1.5;
+}
+
+.hint-text {
+  font-size: 12px;
+  color: #475569;
+  margin-top: 8px;
+}
+
+.text-red { color: #ef4444; }
+
+.info-icon {
+  color: #22c55e;
+  cursor: help;
+}
+
+.submit-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  padding-bottom: 60px;
+}
+
+.btn-submit {
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+  color: white;
+  border: none;
+  padding: 14px 48px;
+  border-radius: 9999px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+  transition: transform 0.2s;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.custom-checkbox, .custom-radio {
+  accent-color: #3b82f6;
+  width: 16px;
+  height: 16px;
+}

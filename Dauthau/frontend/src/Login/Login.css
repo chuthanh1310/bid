@@ -1,0 +1,98 @@
+/* Background full màn */
+.login-page {
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1519681393784-d120267933ba")
+    no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Box chính */
+.login-box {
+  width: 420px;
+  padding: 40px;
+  border-radius: 10px;
+
+  background: rgba(15, 23, 42, 0.85); /* glass dark */
+  backdrop-filter: blur(10px);
+
+  color: #e2e8f0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Title */
+.login-box h2 {
+  color: #38bdf8;
+  margin-bottom: 30px;
+}
+
+/* Input */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #38bdf8;
+  padding: 10px 5px;
+  color: white;
+  outline: none;
+}
+
+/* Remember */
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Button */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+
+  background: linear-gradient(45deg, #9333ea, #f97316);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+
+  margin-bottom: 20px;
+}
+.success-banner {
+  background: #4caf50;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.or {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #cbd5e1;
+}
+
+/* Google */
+.google-btn {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Register */
+.register {
+  text-align: center;
+  font-size: 14px;
+}
+
+.register span {
+  color: #38bdf8;
+  cursor: pointer;
+}
