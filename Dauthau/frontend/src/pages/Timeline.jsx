@@ -32,17 +32,16 @@ function Timeline() {
         if (!token) return;
 
         const followRes = await axios.get("http://localhost:8000/my-follow", {
-          headers: { Authorization: token },
+          headers: { Authorization: `Bearer ${token}` },
         });
 
         const followIds = followRes.data.map((f) => f.bid_id);
 
         const dataRes = await axios.get("http://localhost:8000/data");
-
+        
         const filtered = dataRes.data.filter((item) =>
           followIds.includes(item.bid_id),
         );
-
         setBids(filtered);
       } catch (err) {
         console.error(err);

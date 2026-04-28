@@ -37,7 +37,6 @@ async function register(req, res) {
     res.status(500).json({ error: err.message });
   }
 }
-//const jwt = require("jsonwebtoken");
 
 async function login(req, res) {
   const { email, password } = req.body;

@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import "./SearchPage.css";
 import Table from "../components/Table";
 import InvestBox from "../components/InvestBox";
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -12,89 +13,65 @@ function SearchPage() {
   const query = useQuery();
   const provinceQuery = query.get("province");
 
-  const [allData, setAllData] = useState([]);
   const [results, setResults] = useState([]);
+  const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+
   const [investFields, setInvestFields] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [keywords, setKeywords] = useState([]);
+
   const itemsPerPage = 5;
 
-  const indexOfLast = currentPage * itemsPerPage;
+  // ================= CALL API =================
+  const fetchData = async (page = 1, override = {}) => {
+    try {
+      const res = await axios.get("http://localhost:8000/search", {
+        params: {
+          q: (override.keywords ?? keywords).join(" "),
+          provinces: provinceQuery || "",
+          invest_field: (override.investFields ?? investFields).join(","),
+          page: page,
+          size: itemsPerPage,
+        },
+      });
 
+      setResults(res.data.data || []);
+      setTotal(res.data.total || 0);
+      setCurrentPage(page);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
+  // ================= INIT =================
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/data")
-      .then((res) => {
-        let filtered = res.data;
-        if (provinceQuery) {
-          filtered = filtered.filter((item) =>
-            item.locations?.some(
-              (loc) =>
-                loc.prov_code === provinceQuery ||
-                loc.provCode === provinceQuery,
-            ),
-          );
-        }
-
-        setAllData(filtered);
-        setResults(filtered);
-        setCurrentPage(1);
-      })
-      .catch((err) => console.error(err));
+    fetchData(1);
   }, [provinceQuery]);
-  const applyFilters = (
-    newInvestFields = investFields,
-    newKeywords = keywords,
-  ) => {
-    let filtered = [...allData];
-    if (newInvestFields.length > 0) {
-      filtered = filtered.filter((item) => {
-        const field = item.invest_field || item.investField;
-        if (!field) return false;
-        if (Array.isArray(field)) {
-          return field.some((f) => newInvestFields.includes(f));
-        }
-        return newInvestFields.includes(field);
-      });
-    }
-    if (newKeywords.length > 0) {
-      filtered = filtered.filter((item) => {
 
-        let names = [];
-        if (Array.isArray(item.bid_name)) names = item.bid_name;
-        else if (Array.isArray(item.bidName)) names = item.bidName;
-        else names = [item.bid_name || item.bidName || ""];
-        let investors = [];
-        if (Array.isArray(item.investor_name)) investors = item.investor_name;
-        else if (Array.isArray(item.investorName))
-          investors = item.investorName;
-        else investors = [item.investor_name || item.investorName || ""];
-        return newKeywords.some((kw) => {
-          const k = kw.toLowerCase();
-          return (
-            names.some((n) => (n || "").toLowerCase().includes(k)) ||
-            investors.some((inv) => (inv || "").toLowerCase().includes(k))
-          );
-        });
-      });
-    }
+  // ================= FILTER =================
+  const applyFilters = (newInvestFields, newKeywords) => {
+    setInvestFields(newInvestFields);
+    setKeywords(newKeywords);
 
-    setResults(filtered);
-    setCurrentPage(1);
+    fetchData(1, {
+      investFields: newInvestFields,
+      keywords: newKeywords,
+    });
   };
 
   return (
     <div className="search-container">
       <div className="filter-box">
-        <h3 className="filter-title">Danh sách các gói thầu đang mời thầu</h3>
-        <InvestBox 
-          allData={allData} 
-          setResults={setResults} 
-          setCurrentPage={setCurrentPage}
-          keywords={keywords}
+        <h3 className="filter-title">
+          Danh sách các gói thầu đang mời thầu
+        </h3>
+
+        <InvestBox
+          selected={investFields}
+          setSelected={(list) => applyFilters(list, keywords)}
         />
+
         <div className="keyword-box">
           <p className="keyword-label">Lọc kết quả theo từ khóa</p>
 
@@ -108,7 +85,6 @@ function SearchPage() {
                 const val = keyword.trim();
                 if (!val) return;
 
-                setKeywords([val]);
                 applyFilters(investFields, [val]);
                 setKeyword("");
               }
@@ -119,9 +95,11 @@ function SearchPage() {
 
       <Table
         data={results}
+        total={total}
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
         setCurrentPage={setCurrentPage}
+        onPageChange={fetchData}
       />
     </div>
   );

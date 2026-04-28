@@ -23,6 +23,7 @@ import Header from "./components/Header";
 import { useAuth } from "./components/AuthContext";
 import Timeline from "./pages/Timeline";
 import Verify from "./Register/Verify";
+import Follows from "./pages/Follows";
 function AppContent() {
   const { user } = useAuth();
   //const username = localStorage.getItem("username");
@@ -70,6 +71,9 @@ function AppContent() {
       case "timeline":
         navigate("/timeline");
         break;
+      case "follows":
+        navigate("/follows");
+        break;
     }
   };
 
@@ -86,7 +90,7 @@ function AppContent() {
             <Route path="/province" element={<ProvinceSearch />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="*" element={<div>Page not found</div>} />
-            <Route path="/bid/:bidSlug" element={<BidInfo />} />
+            <Route path="/bid/:slug" element={<BidInfo />} />
             <Route path="/districtjob" element={<DistrictJob />} />
             <Route path="/lcnt" element={<Lcnt />} />
             <Route path="/packagebid" element={<PackageBid />} />
@@ -95,6 +99,7 @@ function AppContent() {
             <Route path="/timeline" element={<Timeline />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/verify" element={<Verify />} />
+            <Route path="/follows" element={<Follows />} />
           </Routes>
         </div>
       </div>

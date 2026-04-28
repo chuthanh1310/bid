@@ -24,8 +24,8 @@ function SideBar({ activeMenu, setActiveMenu }) {
         </p>
 
         <p
-          className={activeMenu === "favorite" ? "active" : ""}
-          onClick={() => setActiveMenu("favorite")}
+          className={activeMenu === "follows" ? "active" : ""}
+          onClick={() => setActiveMenu("follows")}
         >
           <FaRegHeart style={{ marginLeft: "5px" }} /> Gói thầu đang theo dõi
         </p>
@@ -36,8 +36,8 @@ function SideBar({ activeMenu, setActiveMenu }) {
         >
           <FaSearch style={{ marginLeft: "5px" }} />Theo từ khóa
         </p> <p
-          className={activeMenu === "favorite" ? "active" : ""}
-          onClick={() => setActiveMenu("favorite")}
+          className={activeMenu === "home" ? "active" : ""}
+          onClick={() => setActiveMenu("home")}
         >
           <FaSearch style={{ marginLeft: "5px" }} />Phòng chào giá trực tuyến
         </p> <p
@@ -58,15 +58,15 @@ function SideBar({ activeMenu, setActiveMenu }) {
           <FaSearch style={{ marginLeft: "5px" }} />Kế hoạch LCNT
         </p>
          <p
-          className={activeMenu === "favorite" ? "active" : ""}
-          onClick={() => setActiveMenu("favorite")}
+          className={activeMenu === "home" ? "active" : ""}
+          onClick={() => setActiveMenu("home")}
         >
           <FaSearch style={{ marginLeft: "5px" }} />Dự án đầu tư phát triển
         </p>
         <h2>Thông tin đấu thầu</h2>
         <p
-          className={activeMenu === "favorite" ? "active" : ""}
-          onClick={() => setActiveMenu("favorite")}
+          className={activeMenu === "home" ? "active" : ""}
+          onClick={() => setActiveMenu("home")}
         >
           <FaBullseye style={{ marginLeft: "5px" }} />Dự án đầu tư phát triển
         </p>  
@@ -77,20 +77,20 @@ function SideBar({ activeMenu, setActiveMenu }) {
           <FaBullseye style={{ marginLeft: "5px" }} />Tra cứu gói thầu 
         </p> 
         <p
-          className={activeMenu === "favorite" ? "active" : ""}
-          onClick={() => setActiveMenu("favorite")}
+          className={activeMenu === "home" ? "active" : ""}
+          onClick={() => setActiveMenu("home")}
         >
           <FaBullseye style={{ marginLeft: "5px" }} />Dự án đầu tư phát triển
         </p> 
-        <p
-          className={activeMenu === "favorite" ? "active" : ""}
-          onClick={() => setActiveMenu("favorite")}
+       <p
+          className={activeMenu === "home" ? "active" : ""}
+          onClick={() => setActiveMenu("home")}
         >
           <FaBullseye style={{ marginLeft: "5px" }} />Dự án đầu tư phát triển
         </p> 
-        <p
-          className={activeMenu === "favorite" ? "active" : ""}
-          onClick={() => setActiveMenu("favorite")}
+       <p
+          className={activeMenu === "home" ? "active" : ""}
+          onClick={() => setActiveMenu("home")}
         >
           <FaBullseye style={{ marginLeft: "5px" }} />Dự án đầu tư phát triển
         </p> 

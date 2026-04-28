@@ -10,12 +10,13 @@ import {
   FaChartLine,
 } from "react-icons/fa";
 
-// ✅ Danh sách lĩnh vực
+
 const investOptions = [
   { code: "HH", name: "Hàng hóa" },
   { code: "XL", name: "Xây lắp" },
   { code: "TV", name: "Tư vấn" },
   { code: "PTV", name: "Phi tư vấn" },
+  { code:"HON_HOP", name:"Hỗn hợp"}
 ];
 
 function ProvinceSearch() {

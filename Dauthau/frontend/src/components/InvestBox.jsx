@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./InvestBox.css";
 
-function InvestBox({ allData, setResults, setCurrentPage, keywords }) {
+function InvestBox({ selected, setSelected }) {
   const [selectedField, setSelectedField] = useState("");
 
   const fields = [
@@ -9,47 +9,31 @@ function InvestBox({ allData, setResults, setCurrentPage, keywords }) {
     { code: "XL", name: "Xây lắp" },
     { code: "TV", name: "Tư vấn" },
     { code: "PTV", name: "Phi tư vấn" },
+    { code: "HON_HOP", name: "Hỗn hợp" },
   ];
 
-  
-  const handleFilter = (fieldCode) => {
-    setSelectedField(fieldCode); 
-    
-    let filtered = [...allData];
+  const handleChange = (fieldCode) => {
+    setSelectedField(fieldCode);
 
-    if (fieldCode) {
-      filtered = filtered.filter((item) => {
-        const field = item.invest_field || item.investField;
-        if (!field) return false;
-        return Array.isArray(field) ? field.includes(fieldCode) : field === fieldCode;
-      });
-    }
-    if (keywords && keywords.length > 0) {
-      filtered = filtered.filter((item) => {
-        let names = Array.isArray(item.bid_name) ? item.bid_name : [item.bid_name || ""];
-        return keywords.some((kw) => 
-          names.some((n) => n.toLowerCase().includes(kw.toLowerCase()))
-        );
-      });
-    }
-
-    setResults(filtered); 
-    setCurrentPage(1);    
+    // 👇 gửi lên component cha
+    setSelected([fieldCode]);
   };
 
   return (
     <div className="radio-group">
       {fields.map((f) => (
-        <label 
-          key={f.code} 
-          className={`radio-item ${selectedField === f.code ? "active" : ""}`}
+        <label
+          key={f.code}
+          className={`radio-item ${
+            selectedField === f.code ? "active" : ""
+          }`}
         >
           <input
             type="radio"
             name="investField"
             value={f.code}
             checked={selectedField === f.code}
-            onChange={() => handleFilter(f.code)}
+            onChange={() => handleChange(f.code)}
           />
           <span>{f.name}</span>
         </label>

@@ -1,39 +1,42 @@
-/* BidInfo.css */
-.bid-info {
+.bid-container {
+  background: #0f1720;
+  color: #cbd5e1;
   padding: 20px;
-  font-family: Arial, sans-serif;
 }
 
-.bid-info h2 {
+.bid-title {
+  color: #38bdf8;
   margin-bottom: 20px;
 }
 
-.bid-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #fff; /* màu nền trắng */
-  border: 1px solid #ccc; /* viền bao ngoài */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* đổ bóng nhẹ */
+.bid-grid {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 10px;
 }
 
-.bid-table td {
-  padding: 8px 10px;
-  text-align: left;
-  vertical-align: top;
-  border-bottom: 1px solid #eee; /* viền dưới mỗi dòng */
+.bid-left p {
+  color: #94a3b8;
+  margin: 8px 0;
 }
 
-.bid-table tr:last-child td {
-  border-bottom: none; /* bỏ viền dưới dòng cuối */
+.bid-right p {
+  margin: 8px 0;
 }
 
-.bid-table .label {
-  width: 25%;
-  font-weight: bold;
-  color: #333;
+.highlight {
+  color: #ef4444;
 }
 
-.bid-table td:not(.label) {
-  width: 75%;
-  color: #555;
+.highlight-red {
+  color: #f87171;
+}
+
+.status-badge {
+  background: #06b6d4;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-left: 10px;
+  font-size: 12px;
 }

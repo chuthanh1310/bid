@@ -71,6 +71,7 @@ async function initIndex() {
             bid_name: { type: "text" },
             invest_field: { type: "keyword" },
             bid_price: { type: "double" },
+            slug: {type:"keyword"},
 
             locations: {
               type: "nested",
@@ -112,8 +113,6 @@ function normalizeItem(item) {
           .map((v) => v.trim())
           .filter((v) => v)
       : [],
-
-    // ✅ FIX NaN
     bid_price: item.bidPrice
       ? (Array.isArray(item.bidPrice) ? item.bidPrice : [item.bidPrice])
           .map((v) => Number(v))
@@ -125,7 +124,6 @@ function normalizeItem(item) {
       prov_name: l.provName || "",
     })),
 
-    // ✅ KEEP ORIGINAL ISO STRING (ES hiểu được rồi)
     bid_close_date: item.bidCloseDate || null,
     public_date: item.publicDate || null,
   };
@@ -141,6 +139,7 @@ async function indexDocument(item) {
         ...item,
         bid_price: item.bid_price || [],
         locations: item.locations || [],
+        slug:item.slug,
       },
     });
   } catch (err) {
@@ -148,14 +147,24 @@ async function indexDocument(item) {
   }
 }
 
-// ================= SEARCH =================
+
 async function search(
   keyword = "",
   provinces = [],
   minPrice = "",
   investField = "",
+  page = 1,
+  size = 10
 ) {
   const must = [];
+  const filter = [];
+
+  // ép kiểu an toàn
+  const pageNum = Number(page) || 1;
+  const sizeNum = Number(size) || 10;
+  const from = (pageNum - 1) * sizeNum;
+
+  // ================= KEYWORD =================
   if (keyword) {
     must.push({
       multi_match: {
@@ -165,8 +174,10 @@ async function search(
       },
     });
   }
+
+  // ================= PROVINCE =================
   if (provinces.length > 0) {
-    must.push({
+    filter.push({
       nested: {
         path: "locations",
         query: {
@@ -174,13 +185,16 @@ async function search(
             should: provinces.map((p) => ({
               term: { "locations.prov_code": p },
             })),
+            minimum_should_match: 1,
           },
         },
       },
     });
   }
+
+  // ================= PRICE =================
   if (minPrice && !isNaN(Number(minPrice))) {
-    must.push({
+    filter.push({
       range: {
         bid_price: {
           gte: Number(minPrice),
@@ -188,26 +202,42 @@ async function search(
       },
     });
   }
+
+  // ================= INVEST FIELD =================
   if (investField) {
-    const fieldsArray = investField.split(",");
-    must.push({
+    const fieldsArray = investField
+      .split(",")
+      .map((f) => f.trim())
+      .filter((f) => f);
+
+    filter.push({
       terms: {
         invest_field: fieldsArray,
       },
     });
   }
 
+  // ================= REALTIME =================
+  
+
   const result = await es.search({
     index: INDEX,
-    size: 1000,
+    from: from,    
+    size: sizeNum,  
     body: {
       query: {
-        bool: { must },
+        bool: {
+          must,
+          filter,
+        },
       },
     },
   });
 
-  return result.body.hits.hits.map((h) => h._source);
+  return {
+    total: result.body.hits.total.value,
+    data: result.body.hits.hits.map((h) => h._source),
+  };
 }
 
 // ================= EXPORT =================

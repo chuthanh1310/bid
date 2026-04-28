@@ -12,6 +12,7 @@ function KeyWordSearch() {
   const { globalInvestFields, globalKeywords,  globalProvince,isNation:globalIsNation } = useInvest();
   const [results, setResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState(0);
   const [minPrice, setMinPrice] = useState("0");
   const [showProvinceBox, setShowProvinceBox] = useState(false);
   const [investFields, setInvestFields] = useState(["HH"]);
@@ -26,7 +27,7 @@ function KeyWordSearch() {
     setLocalInvestFields(globalInvestFields);
     setLocalKeywords(globalKeywords);
   }, [globalProvince, globalIsNation, globalInvestFields, globalKeywords]);
-  const handleSearch = async (override = {}) => {
+  const handleSearch = async (page=1,override = {}) => {
     try {
       const res = await axios.get("http://localhost:8000/search", {
         params: {
@@ -38,11 +39,14 @@ function KeyWordSearch() {
 
           minPrice: minPrice,
           invest_field: (override.investFields ?? investFields).join(","),
+          page:page,
+          size:itemsPerPage,
         },
       });
 
-      setResults(res.data);
-      setCurrentPage(1);
+      setResults(res.data.data||[]);
+      setTotal(res.data.total || 0);
+      setCurrentPage(page);
     } catch (err) {
       console.error(err);
     }
@@ -55,7 +59,7 @@ function KeyWordSearch() {
           <InvestFields
             selected={localInvestFields}
             setSelected={setLocalInvestFields}
-            onChange={(newList) => handleSearch({ investFields: newList })}
+            onChange={(newList) => handleSearch(1,{ investFields: newList })}
           />
 
           <h3>Chọn thời điểm đăng tải:</h3>
@@ -72,7 +76,7 @@ function KeyWordSearch() {
             showProvinceBox={showProvinceBox}
             setShowProvinceBox={setShowProvinceBox}
           />
-          <button className="btn-search" onClick={handleSearch}>
+          <button className="btn-search" onClick={() => handleSearch()}>
             Tìm Kiếm
           </button>
 
@@ -82,7 +86,7 @@ function KeyWordSearch() {
             keywords={localKeywords}
             setKeywords={setLocalKeywords}
           />
-          <button className="btn-search" onClick={handleSearch}>
+          <button className="btn-search" onClick={() => handleSearch()}>
             Tìm Kiếm
           </button>
         </div>
@@ -105,9 +109,11 @@ function KeyWordSearch() {
       <div className="result-wrapper">
         <Table
           data={results}
+          total={total}
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
           setCurrentPage={setCurrentPage}
+          onPageChange={handleSearch}
         />
       </div>
     </>

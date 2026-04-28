@@ -1,0 +1,97 @@
+.follows-page {
+  background: #0b0f14;
+  color: #cfd8dc;
+  min-height: 100vh;
+  padding: 20px;
+  justify-content: left;
+  text-align: left;
+}
+
+/* 🔵 TOP FILTER */
+.top-filter {
+  margin-bottom: 20px;
+}
+
+.top-filter h3 {
+  color: #00c3ff;
+  font-size: 14px;
+}
+
+.top-filter label {
+  display: block;
+  margin: 8px 0;
+}
+
+/* 🔵 TABS */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #1e2a33;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  width: 260px;
+  background: none;
+  border: none;
+  color: #00c3ff;
+  padding: 14px;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background: #2a3c46;
+  border-bottom: 2px solid #00c3ff;
+}
+
+/* 🔵 CONTENT */
+.content h3 {
+  color: #00c3ff;
+  margin-top: 20px;
+}
+
+.content label {
+  display: block;
+  margin: 10px 0;
+}
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  margin-top: 40px;
+  color: #777;
+}
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th {
+  background: #1e2a33;
+  color: #00c3ff;
+  padding: 12px;
+  text-align: left;
+}
+
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #1e2a33;
+}
+
+.table tr:hover {
+  background: #162028;
+}
+
+.empty {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}
+.status-filter {
+  margin: 10px 0;
+}
+
+.status-filter label {
+  margin-right: 20px;
+  cursor: pointer;
+}

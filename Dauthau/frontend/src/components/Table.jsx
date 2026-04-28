@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-function Table({ data, currentPage, itemsPerPage, setCurrentPage }) {
+function Table({
+  data,
+  total,
+  currentPage,
+  itemsPerPage,
+  setCurrentPage,
+  onPageChange,
+}) {
   const [followed, setFollowed] = useState({});
 
-  const indexOfLast = currentPage * itemsPerPage;
-  const indexOfFirst = indexOfLast - itemsPerPage;
-  const currentData = data.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const currentData = data;
+  const totalPages = Math.ceil(total / itemsPerPage);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -15,7 +20,7 @@ function Table({ data, currentPage, itemsPerPage, setCurrentPage }) {
 
     axios
       .get("http://localhost:8000/my-follow", {
-        headers: { Authorization: token },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         const map = {};
@@ -42,13 +47,13 @@ function Table({ data, currentPage, itemsPerPage, setCurrentPage }) {
         await axios.post(
           "http://localhost:8000/unfollow",
           { bid_id: id },
-          { headers: { Authorization: token } },
+          { headers: { Authorization: `Bearer ${token}` } },
         );
       } else {
         await axios.post(
           "http://localhost:8000/follow",
           { bid_id: id },
-          { headers: { Authorization: token } },
+          { headers: { Authorization: `Bearer ${token}` } },
         );
       }
 
@@ -182,12 +187,12 @@ function Table({ data, currentPage, itemsPerPage, setCurrentPage }) {
 
                 <td>
                   <span
-                    onClick={() => handleFollow(item.bid_id || item.id)}
+                    onClick={() => handleFollow(item.bid_id)}
                     className={`follow-btn ${
-                      followed[item.bid_id || item.id] ? "followed" : ""
+                      followed[item.bid_id] ? "followed" : ""
                     }`}
                   >
-                    {followed[item.bid_id || item.id] ? (
+                    {followed[item.bid_id] ? (
                       <FaHeart />
                     ) : (
                       <FaRegHeart />
@@ -203,7 +208,11 @@ function Table({ data, currentPage, itemsPerPage, setCurrentPage }) {
       <div className="pagination">
         <button
           disabled={currentPage === 1}
-          onClick={() => setCurrentPage(currentPage - 1)}
+          onClick={() => {
+            const newPage = currentPage - 1;
+            setCurrentPage(newPage);
+            onPageChange(newPage);
+          }}
         >
           ◀
         </button>
@@ -215,7 +224,10 @@ function Table({ data, currentPage, itemsPerPage, setCurrentPage }) {
             <button
               key={`page-${num}`}
               className={currentPage === num ? "active-page" : ""}
-              onClick={() => setCurrentPage(num)}
+              onClick={() => {
+                setCurrentPage(num);
+                onPageChange(num);
+              }}
             >
               {num}
             </button>
@@ -224,7 +236,11 @@ function Table({ data, currentPage, itemsPerPage, setCurrentPage }) {
 
         <button
           disabled={currentPage === totalPages || totalPages === 0}
-          onClick={() => setCurrentPage(currentPage + 1)}
+          onClick={() => {
+            const newPage=currentPage+1;
+            setCurrentPage(newPage);
+            onPageChange(newPage);
+          }}
         >
           ▶
         </button>

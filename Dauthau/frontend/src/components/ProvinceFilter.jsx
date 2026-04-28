@@ -4,10 +4,10 @@ import "../pages/KeyWordSearch.css"
 import { useInvest } from "../context/InvestContext";
 
 function ProvinceFilter({ isNation,setIsNation,selectedProvinces, setSelectedProvinces, showProvinceBox, setShowProvinceBox }) {
-  //const { globalProvince, setGlobalProvince, isNation, setIsNation } = useInvest();
+  //const { globalProvince, setGlobalProvince} = useInvest();
   const handleToggleProvince = (code) => {
-    if (globalProvince.includes(code)) {
-      setSelectedProvinces(globalProvince.filter((p) => p !== code));
+    if (selectedProvinces.includes(code)) {
+      setSelectedProvinces(selectedProvinces.filter((p) => p !== code));
     } else {
       setSelectedProvinces([...selectedProvinces, code]);
     }

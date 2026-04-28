@@ -6,6 +6,7 @@ const investOptions = [
   { code: "XL", name: "Xây lắp" },
   { code: "TV", name: "Tư vấn" },
   { code: "PTV", name: "Phi tư vấn" },
+  { code:"HON_HOP", name:"Hỗn hợp"}
 ];
 
 export default function InvestFields({ selected, setSelected, onChange }) {
