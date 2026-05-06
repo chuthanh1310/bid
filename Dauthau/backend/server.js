@@ -131,28 +131,43 @@ app.get("/my-follow", authMiddleware, async (req, res) => {
       prepare: true,
     });
 
-    
+    console.log("USER FROM TOKEN:", req.user);
+    console.log("USER_ID QUERY:", user_id);
+    console.log("CASSANDRA ROWS:", result.rows);
+
     const bids = [];
 
     for (const row of result.rows) {
       try {
-        const esResult = await es.get({
+        // 🔥 dùng search thay vì get
+        const esResult = await es.search({
           index: "contractors",
-          id: row.bid_id,
+          size: 1,
+          body: {
+            query: {
+              term: {
+                bid_id: row.bid_id, // 🔥 MATCH FIELD
+              },
+            },
+          },
         });
 
-        bids.push({
-          ...row,
-          ...esResult.body._source,
-        });
+        const hits = esResult.body.hits.hits;
+
+        if (hits.length > 0) {
+          bids.push({
+            ...row,
+            ...hits[0]._source,
+          });
+        } else {
+          console.log("ES not found (search):", row.bid_id);
+        }
       } catch (err) {
-        console.log("ES not found:", row.bid_id);
+        console.log("ES ERROR:", err.message);
       }
     }
 
-    
     res.json(bids);
-
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
